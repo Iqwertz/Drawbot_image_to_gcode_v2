@@ -1,0 +1,268 @@
+(loaded image: D:\Julius\Projekte-Julius\img2plot\input\JuliusBgRemoved.png)
+(image_rotate: no rotation necessary)
+(image_crop desired ratio of 0.77777785)
+(image_crop old size: 1066 by 1502     ratio: 0.7097204)
+(image_crop new size: 1066 by 1370     ratio: 0.7781022)
+(image_scale, old size: 1066 by 1370     ratio: 0.7781022)
+(image_scale, new size: 1094 by 1405     ratio: 0.77864766)
+(image_unsharpen: 4)
+(image_unsharpen: 3)
+(image_boarder: b1.png   0   0)
+(image_boarder: b11.png   0   0)
+(image_desaturate)
+(final dimensions: 1094 by 1405)
+(paper_size: 812,80 by 1016,00      32,00 by 40,00)
+(drawing size max: 711,20 by 914,40      28,00 by 36,00)
+(drawing size calculated 711,20 by 913,38      28,00 by 35,96)
+(gcode_scale X:  0,65)
+(gcode_scale Y:  0,65)
+(gcode_scale:    0,65)
+(adjustbrightness: 10)
+(squiggle_length: 500)
+(extreams of X: 2.14748365E9 thru -2.14748365E9)
+(extreams of Y: 2.14748365E9 thru -2.14748365E9)
+(loaded image: D:\Julius\Projekte-Julius\img2plot\input\JuliusBgRemoved.png)
+(image_rotate: no rotation necessary)
+(image_crop desired ratio of 0.77777785)
+(image_crop old size: 1066 by 1502     ratio: 0.7097204)
+(image_crop new size: 1066 by 1370     ratio: 0.7781022)
+(image_scale, old size: 1066 by 1370     ratio: 0.7781022)
+(image_scale, new size: 1000 by 1285     ratio: 0.7782101)
+(image_unsharpen: 3)
+(image_boarder: b6.png   0   0)
+(image_desaturate)
+(final dimensions: 1000 by 1285)
+(paper_size: 812,80 by 1016,00      32,00 by 40,00)
+(drawing size max: 711,20 by 914,40      28,00 by 36,00)
+(drawing size calculated 711,20 by 913,89      28,00 by 35,98)
+(gcode_scale X:  0,71)
+(gcode_scale Y:  0,71)
+(gcode_scale:    0,71)
+(extreams of X: 2.14748365E9 thru -2.14748365E9)
+(extreams of Y: 2.14748365E9 thru -2.14748365E9)
+(loaded image: D:\Julius\Projekte-Julius\img2plot\input\JuliusBgRemoved.png)
+(image_rotate: no rotation necessary)
+(image_crop desired ratio of 0.77777785)
+(image_crop old size: 1066 by 1502     ratio: 0.7097204)
+(image_crop new size: 1066 by 1370     ratio: 0.7781022)
+(image_scale, old size: 1066 by 1370     ratio: 0.7781022)
+(image_scale, new size: 1000 by 1285     ratio: 0.7782101)
+(image_unsharpen: 3)
+(image_boarder: b6.png   0   0)
+(image_desaturate)
+(final dimensions: 1000 by 1285)
+(paper_size: 812,80 by 1016,00      32,00 by 40,00)
+(drawing size max: 711,20 by 914,40      28,00 by 36,00)
+(drawing size calculated 711,20 by 913,89      28,00 by 35,98)
+(gcode_scale X:  0,71)
+(gcode_scale Y:  0,71)
+(gcode_scale:    0,71)
+(adjustbrightness: 9)
+(squiggle_length: 1000)
+(extreams of X: 2.14748365E9 thru -2.14748365E9)
+(extreams of Y: 2.14748365E9 thru -2.14748365E9)
+
+G21
+G90
+G1 Z0
+G1 Z0
+G1 X-219.76 Y214.11
+G1 Z1
+G1 X-233.27 Y204.86
+G1 X-230.43 Y200.60
+G1 X-232.56 Y199.17
+G1 X-231.85 Y197.75
+G1 X-236.83 Y194.20
+G1 X-234.70 Y191.35
+G1 X-239.67 Y187.80
+G1 X-238.25 Y185.66
+G1 X-239.67 Y184.95
+G1 X-238.96 Y183.53
+G1 X-235.41 Y186.37
+G1 X-238.96 Y191.35
+G1 X-232.56 Y195.62
+G1 X-235.41 Y199.17
+G1 X-226.87 Y204.86
+G1 X-228.30 Y207.00
+G1 X-226.16 Y208.42
+G1 X-222.61 Y211.27
+G1 X-221.89 Y211.98
+G1 X-231.14 Y205.58
+G1 X-229.01 Y202.73
+G1 X-230.43 Y202.02
+G1 X-229.72 Y201.31
+G1 X-236.83 Y196.33
+G1 X-233.27 Y191.35
+G1 X-239.67 Y187.08
+G1 X-237.54 Y184.24
+G1 X-221.18 Y195.62
+G1 X-204.11 Y207.71
+G1 X-212.65 Y218.38
+G1 X-221.18 Y212.69
+G1 X-221.89 Y213.40
+G1 X-224.74 Y211.27
+G1 X-227.58 Y209.13
+G1 X-226.16 Y207.00
+G1 X-229.72 Y204.15
+G1 X-228.30 Y204.86
+G1 X-229.01 Y206.29
+G1 X-230.43 Y205.58
+G1 X-229.72 Y204.86
+G1 X-229.01 Y205.58
+G1 X-226.16 Y207.71
+G1 X-227.58 Y207.00
+G1 X-226.87 Y205.58
+G1 X-227.58 Y204.86
+G1 X-227.58 Y204.86
+G1 X-229.72 Y207.71
+G1 X-229.01 Y208.42
+G1 X-216.92 Y216.95
+G1 X-209.09 Y205.58
+G1 X-219.76 Y197.75
+G1 X-221.89 Y200.60
+G1 X-217.63 Y203.44
+G1 X-200.56 Y215.53
+G1 X-194.87 Y207.00
+G1 X-189.89 Y210.55
+G1 X-195.58 Y217.67
+G1 X-204.83 Y210.55
+G1 X-219.76 Y199.89
+G1 X-226.87 Y194.91
+G1 X-219.76 Y184.95
+G1 X-215.49 Y188.51
+G1 X-218.34 Y192.06
+G1 X-226.16 Y186.37
+G1 X-223.32 Y182.11
+G1 X-206.25 Y194.20
+G1 X-212.65 Y202.02
+G1 X-216.20 Y207.00
+G1 X-219.76 Y204.15
+G1 X-207.67 Y187.08
+G1 X-212.65 Y183.53
+G1 X-218.34 Y190.64
+G1 X-224.74 Y185.66
+G1 X-223.32 Y183.53
+G1 X-215.49 Y189.22
+G1 X-201.27 Y200.60
+G1 X-204.83 Y204.86
+G1 X-193.45 Y214.11
+G1 X-189.89 Y209.13
+G1 X-183.49 Y214.11
+G1 X-182.07 Y211.98
+G1 X-176.38 Y216.24
+G1 X-172.82 Y211.98
+G1 X-156.46 Y224.78
+G1 X-153.62 Y226.91
+G1 X-156.46 Y230.47
+G1 X-151.49 Y234.02
+G1 X-164.29 Y250.38
+G1 X-169.98 Y258.92
+G1 X-172.82 Y262.47
+G1 X-155.75 Y274.56
+G1 X-147.22 Y262.47
+G1 X-151.49 Y258.92
+G1 X-148.64 Y255.36
+G1 X-155.75 Y249.67
+G1 X-149.35 Y241.14
+G1 X-153.62 Y237.58
+G1 X-169.98 Y224.78
+G1 X-158.60 Y209.84
+G1 X-163.58 Y206.29
+G1 X-161.44 Y203.44
+G1 X-162.86 Y202.02
+G1 X-175.67 Y218.38
+G1 X-184.91 Y211.27
+G1 X-186.33 Y213.40
+G1 X-169.98 Y226.20
+G1 X-157.89 Y210.55
+G1 X-157.18 Y211.27
+G1 X-162.86 Y218.38
+G1 X-153.62 Y225.49
+G1 X-166.42 Y241.85
+G1 X-161.44 Y245.40
+G1 X-152.20 Y234.02
+G1 X-166.42 Y222.64
+G1 X-179.22 Y212.69
+G1 X-188.47 Y224.07
+G1 X-204.83 Y211.27
+G1 X-217.63 Y202.02
+G1 X-220.47 Y199.89
+G1 X-217.63 Y195.62
+G1 X-205.54 Y204.15
+G1 X-202.69 Y200.60
+G1 X-199.14 Y203.44
+G1 X-195.58 Y206.29
+G1 X-197.71 Y209.13
+G1 X-200.56 Y207.00
+G1 X-199.14 Y204.86
+G1 X-192.02 Y210.55
+G1 X-199.14 Y219.80
+G1 X-211.94 Y210.55
+G1 X-214.07 Y213.40
+G1 X-209.80 Y216.24
+G1 X-206.96 Y211.98
+G1 X-198.42 Y217.67
+G1 X-192.02 Y221.93
+G1 X-198.42 Y230.47
+G1 X-181.36 Y242.56
+G1 X-169.98 Y226.91
+G1 X-156.46 Y237.58
+G1 X-166.42 Y250.38
+G1 X-149.35 Y262.47
+G1 X-147.93 Y260.34
+G1 X-150.06 Y258.92
+G1 X-148.64 Y256.78
+G1 X-158.60 Y248.96
+G1 X-150.77 Y237.58
+G1 X-167.13 Y224.78
+G1 X-157.89 Y212.69
+G1 X-165.00 Y207.00
+G1 X-161.44 Y202.02
+G1 X-174.24 Y218.38
+G1 X-158.60 Y230.47
+G1 X-150.06 Y236.87
+G1 X-162.15 Y252.51
+G1 X-146.51 Y263.89
+G1 X-150.77 Y269.58
+G1 X-146.51 Y272.43
+G1 X-158.60 Y289.50
+G1 X-153.62 Y293.05
+G1 X-160.02 Y302.30
+G1 X-158.60 Y303.01
+G1 X-159.31 Y304.43
+G1 X-158.60 Y305.14
+G1 X-159.31 Y306.57
+G1 X-157.89 Y307.28
+G1 X-158.60 Y308.70
+G1 X-156.46 Y310.12
+G1 X-157.18 Y311.54
+G1 X-155.04 Y312.97
+G1 X-155.75 Y314.39
+G1 X-154.33 Y315.10
+G1 X-155.04 Y316.52
+G1 X-152.91 Y317.95
+G1 X-162.15 Y331.46
+G1 X-160.73 Y332.17
+G1 X-152.20 Y319.37
+G1 X-155.75 Y316.52
+G1 X-154.33 Y314.39
+G1 X-157.18 Y312.26
+G1 X-156.46 Y311.54
+G1 X-157.18 Y310.83
+G1 X-157.89 Y310.12
+G1 X-157.18 Y308.70
+G1 X-158.60 Y307.99
+G1 X-159.31 Y307.28
+G1 X-157.89 Y305.14
+G1 X-158.60 Y304.43
+G1 X-159.31 Y305.85
+G1 X-157.89 Y306.57
+G1 X-158.60 Y307.28
+G1 X-157.18 Y307.99
+G1 Z0
+G1 X0.10 Y0.10
+G1 X0 y0
+(Drew 191 lines for 5.940389 feet)
+(Pen was lifted 3 times for 1.0066241 feet)
+(Extreams of X: -355.6 thru 354.88876)
+(Extreams of Y: -201.23082 thru 679.23474)
