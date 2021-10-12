@@ -4,15 +4,17 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 void gcode_header() {
+  OUTPUT.println("$H");
+  OUTPUT.println("G92X0Y0Z0");
+  OUTPUT.println("F2000");
   OUTPUT.println("G21");
   OUTPUT.println("G90");
-  OUTPUT.println("G1 Z0");
+OUTPUT.println("M05");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 void gcode_trailer() {
-  OUTPUT.println("G1 Z0");
-  OUTPUT.println("G1 X" + gcode_format(0.1) + " Y" + gcode_format(0.1));
+  OUTPUT.println("M05");
   OUTPUT.println("G1 X0 y0");
 }
 
@@ -74,7 +76,7 @@ void create_gcode_files (int line_count) {
     y = 0;
     String gname = "gcode\\gcode_" + basefile_selected + "_pen" + p + "_" + copic_sets[current_copic_set][p] + ".txt";
     OUTPUT = createWriter(sketchPath("") + gname);
-    OUTPUT.println(gcode_comments);
+    //OUTPUT.println(gcode_comments);
     gcode_header();
     
     for (int i=1; i<line_count; i++) { 
@@ -88,7 +90,7 @@ void create_gcode_files (int line_count) {
  
         if (x != gcode_scaled_x1 || y != gcode_scaled_y1) {
           // Oh crap, where the line starts is not where I am, pick up the pen and move there.
-          OUTPUT.println("G1 Z0");
+          OUTPUT.println("M05");
           is_pen_down = false;
           distance = sqrt( sq(abs(x - gcode_scaled_x1)) + sq(abs(y - gcode_scaled_y1)) );
           String buf = "G1 X" + gcode_format(gcode_scaled_x1) + " Y" + gcode_format(gcode_scaled_y1);
@@ -101,14 +103,14 @@ void create_gcode_files (int line_count) {
         
         if (d1.lines[i].pen_down) {
           if (is_pen_down == false) {
-            OUTPUT.println("G1 Z1");
+            OUTPUT.println("M03S300");
             is_pen_down = true;
           }
           pen_drawing = pen_drawing + distance;
           lines_drawn++;
         } else {
           if (is_pen_down == true) {
-            OUTPUT.println("G1 Z0");
+            OUTPUT.println("M05");
             is_pen_down = false;
             pen_movement = pen_movement + distance;
             pen_lifts++;
@@ -125,12 +127,12 @@ void create_gcode_files (int line_count) {
     }
     
     gcode_trailer();
-    OUTPUT.println("(Drew " + lines_drawn + " lines for " + pen_drawing  / 25.4 / 12 + " feet)");
-    OUTPUT.println("(Pen was lifted " + pen_lifts + " times for " + pen_movement  / 25.4 / 12 + " feet)");
-    OUTPUT.println("(Extreams of X: " + dx.min + " thru " + dx.max + ")");
-    OUTPUT.println("(Extreams of Y: " + dy.min + " thru " + dy.max + ")");
-    OUTPUT.flush();
-    OUTPUT.close();
+   // OUTPUT.println("(Drew " + lines_drawn + " lines for " + pen_drawing  / 25.4 / 12 + " feet)");
+   // OUTPUT.println("(Pen was lifted " + pen_lifts + " times for " + pen_movement  / 25.4 / 12 + " feet)");
+   // OUTPUT.println("(Extreams of X: " + dx.min + " thru " + dx.max + ")");
+   // OUTPUT.println("(Extreams of Y: " + dy.min + " thru " + dy.max + ")");
+   // OUTPUT.flush();
+   // OUTPUT.close();
     println("gcode created:  " + gname);
   }
 }

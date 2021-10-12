@@ -16,17 +16,19 @@ import processing.pdf.*;
 
 
 // Constants 
-final float   paper_size_x = 32 * 25.4;
-final float   paper_size_y = 40 * 25.4;
-final float   image_size_x = 28 * 25.4;
-final float   image_size_y = 36 * 25.4;
-final float   paper_top_to_origin = 285;      //mm, make smaller to move drawing down on paper
+final float scale_factor = 10;
+final float global_gcode_scale = 0.25; //if 0 scale is auto. calculated
+final float   paper_size_x = 16 * scale_factor;
+final float   paper_size_y = 20 * scale_factor;
+final float   image_size_x = 28 * 15;
+final float   image_size_y = 36 * 15;
+final float   paper_top_to_origin = 0;      //mm, make smaller to move drawing down on paper
 final float   pen_width = 0.65;               //mm, determines image_scale, reduce, if solid black areas are speckled with white holes.
-final int     pen_count = 6;
+final int     pen_count = 1;
 final char    gcode_decimal_seperator = '.';    
 final int     gcode_decimals = 2;             // Number of digits right of the decimal point in the gcode files.
 final int     svg_decimals = 2;               // Number of digits right of the decimal point in the SVG file.
-final float   grid_scale = 25.4;              // Use 10.0 for centimeters, 25.4 for inches, and between 444 and 529.2 for cubits.
+final float   grid_scale = 10.0;              // Use 10.0 for centimeters, 25.4 for inches, and between 444 and 529.2 for cubits.
 
 
 // Every good program should have a shit pile of badly named globals.
@@ -217,9 +219,13 @@ void setup_squiggles() {
   
   gcode_scale_x = image_size_x / img.width;
   gcode_scale_y = image_size_y / img.height;
-  gcode_scale = min(gcode_scale_x, gcode_scale_y);
-  gcode_offset_x = - (img.width * gcode_scale / 2.0);  
-  gcode_offset_y = - (paper_top_to_origin - (paper_size_y - (img.height * gcode_scale)) / 2.0);
+  if(global_gcode_scale!=0){
+    gcode_scale=global_gcode_scale;
+  }else{
+    gcode_scale = min(gcode_scale_x, gcode_scale_y);
+  }
+  gcode_offset_x = 0;//- (img.width * gcode_scale / 2.0);  
+  gcode_offset_y = - paper_top_to_origin; // - (paper_size_y - (img.height * gcode_scale)) / 2.0);
 
   screen_scale_x = width / (float)img.width;
   screen_scale_y = height / (float)img.height;
