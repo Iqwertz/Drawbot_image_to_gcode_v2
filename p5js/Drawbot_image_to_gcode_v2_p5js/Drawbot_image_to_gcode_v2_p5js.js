@@ -1,12 +1,3 @@
-function setup() {
-
-}
-
-
-function draw() {
-
-}
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // My Drawbot, "Death to Sharpie"
 // Jpeg to gcode simplified (kinda sorta works version, v3.75 (beta))
@@ -23,7 +14,7 @@ function draw() {
 
 
 // Constants 
-/*let scale_factor = 10;
+let scale_factor = 10;
 let global_gcode_scale = 0.25; //if 0 scale is auto. calculated
 let flip_gcode_xy = true;
 let skip_gcode_negative_values = true;
@@ -43,10 +34,10 @@ let input_image_path = "D:/Julius/Projekte-Julius/img2plot/input/ich-removebg-pr
 
 
 // Every good program should have a shit pile of badly named globals.
-Class cl = null;
-pfm ocl;
-let current_pfm = 0;
-String[] pfms = {"PFM_original", "PFM_squares"}; 
+//Class cl = null;
+//pfm ocl;
+//let current_pfm = 0;
+//String[] pfms = {"PFM_original", "PFM_squares"}; 
 
 let     state = 1;
 let     pen_selected = 0;
@@ -77,11 +68,73 @@ let  basefile_selected = "";
 let     startTime = 0;
 let ctrl_down = false;
 
-Limit   dx, dy;
-PrintWriter OUTPUT;
-botDrawing d1;
+//Limit   dx, dy;
+//PrintWriter OUTPUT;
+//botDrawing d1;
 
-float[] pen_distribution = new float[pen_count];
+//float[] pen_distribution = new float[pen_count];
+function preload() {
+  img = loadImage(input_image_path);
+}
+
+function setup() {
+  colorMode(RGB);
+  //randomSeed(millis());
+  randomSeed(3);
+  d1 = new botDrawing();
+  //dx = new Limit(); 
+  //dy = new Limit(); 
+  //loadInClass(pfms[current_pfm]);
+  //selectInput("Select an image to process:", "fileSelected");
+}
+
+
+function draw() {
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+function setup_squiggles() {
+  let   gcode_scale_x;
+  let   gcode_scale_y;
+  let   screen_scale_x;
+  let   screen_scale_y;
+
+  //println("setup_squiggles...");
+
+  d1.line_count = 0;
+  //randomSeed(millis());
+  img = loadImage(path_selected, "jpeg");  // Load the image into the program  
+
+  image_rotate();
+
+  img_orginal = createImage(img.width, img.height, RGB);
+  img_orginal.copy(img, 0, 0, img.width, img.height, 0, 0, img.width, img.height);
+
+  ocl.pre_processing();
+  img.loadPixels();
+  img_reference = createImage(img.width, img.height, RGB);
+  img_reference.copy(img, 0, 0, img.width, img.height, 0, 0, img.width, img.height);
+  
+  gcode_scale_x = image_size_x / img.width;
+  gcode_scale_y = image_size_y / img.height;
+  if(global_gcode_scale!=0){
+    gcode_scale=global_gcode_scale;
+  }else{
+    gcode_scale = min(gcode_scale_x, gcode_scale_y);
+  }
+  gcode_offset_x = 0;//- (img.width * gcode_scale / 2.0);  
+  gcode_offset_y = - paper_top_to_origin; // - (paper_size_y - (img.height * gcode_scale)) / 2.0);
+
+  screen_scale_x = width / (float)img.width;
+  screen_scale_y = height / (float)img.height;
+  screen_scale = min(screen_scale_x, screen_scale_y);
+  screen_scale_org = screen_scale;
+
+  state++;
+}
+
+/*
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 void setup() {
@@ -218,23 +271,6 @@ void render_all() {
   if (display_mode == "drawing") {
     //<d1.render_all();
     d1.render_some(display_line_count);
-  }
-
-  if (display_mode == "pen") {
-    //image(img, 0, 0);
-    d1.render_one_pen(display_line_count, pen_selected);
-  }
-  
-  if (display_mode == "original") {
-    image(img_orginal, 0, 0);
-  }
-
-  if (display_mode == "reference") {
-    image(img_reference, 0, 0);
-  }
-  
-  if (display_mode == "lightened") {
-    image(img, 0, 0);
   }
 }
 

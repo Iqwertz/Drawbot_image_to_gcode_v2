@@ -33,28 +33,6 @@ class botDrawing {
       }
     }
   }
-  
-  void set_pen_continuation_flags () {
-    float prev_x = 123456.0;
-    float prev_y = 654321.0;
-    boolean prev_pen_down = false;
-    int prev_pen_number = 123456;
-    
-    for (int i=1; i<line_count; i++) { 
- 
-      if (prev_x != lines[i].x1 || prev_y != lines[i].y1 || prev_pen_down != lines[i].pen_down  || prev_pen_number != lines[i].pen_number) {
-        lines[i].pen_continuation = false;
-      } else {
-        lines[i].pen_continuation = true;
-      }
-
-      prev_x = lines[i].x2;
-      prev_y = lines[i].y2;
-      prev_pen_down = lines[i].pen_down;
-      prev_pen_number = lines[i].pen_number;
-    }
-    println("set_pen_continuation_flags");
-  }
 
   void addline(int pen_number_, boolean pen_down_, float x1_, float y1_, float x2_, float y2_) {
     line_count++;
@@ -70,25 +48,6 @@ class botDrawing {
     for (int i=1; i<=line_count; i++) {
       int cidx = (int)map(i - 1, 0, line_count, 1, total_pens);
       lines[i].pen_number = cidx;
-      //println (i + "   " + lines[i].pen_number);
-    }
-  }
-
-  public void distribute_pen_changes_according_to_percentages (int line_count, int total_pens) {
-    int p = 0;
-    float p_total = 0;
-    
-    for (int i=1; i<=line_count; i++) {
-      if (i > pen_distribution[p] + p_total) {
-        p_total = p_total + pen_distribution[p];
-        p++;
-      }
-      if (p > total_pens - 1) {
-        // Hacky fix for off by one error
-        println("ERROR: distribute_pen_changes_according_to_percentages, p:  ", p);
-        p = total_pens - 1;
-      }
-      lines[i].pen_number = p;
       //println (i + "   " + lines[i].pen_number);
     }
   }

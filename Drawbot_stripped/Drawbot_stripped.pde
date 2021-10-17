@@ -122,8 +122,6 @@ void draw() {
     ocl.post_processing();
 
     set_even_distribution();
-    d1.evenly_distribute_pen_changes(d1.get_line_count(), pen_count);
-    d1.distribute_pen_changes_according_to_percentages(display_line_count, pen_count);
 
     println("elapsed time: " + (millis() - startTime) / 1000.0 + " seconds");
     display_line_count = d1.line_count;
@@ -209,23 +207,6 @@ void render_all() {
     //<d1.render_all();
     d1.render_some(display_line_count);
   }
-
-  if (display_mode == "pen") {
-    //image(img, 0, 0);
-    d1.render_one_pen(display_line_count, pen_selected);
-  }
-  
-  if (display_mode == "original") {
-    image(img_orginal, 0, 0);
-  }
-
-  if (display_mode == "reference") {
-    image(img_reference, 0, 0);
-  }
-  
-  if (display_mode == "lightened") {
-    image(img, 0, 0);
-  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -271,8 +252,6 @@ void keyPressed() {
         break;
      }
   }
-  
-  d1.distribute_pen_changes_according_to_percentages(display_line_count, pen_count);
   //surface.setSize(img.width, img.height);
   redraw();
 }
