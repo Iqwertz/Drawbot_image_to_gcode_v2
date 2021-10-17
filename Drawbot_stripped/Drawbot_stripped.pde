@@ -11,8 +11,6 @@
 // GClip:          https://forum.processing.org/two/discussion/6179/why-does-not-it-run-clipboard
 // Dynamic class:  https://processing.org/discourse/beta/num_1262759715.html
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-import java.util.Map;
-
 
 // Constants 
 final float scale_factor = 10;
@@ -30,6 +28,8 @@ final char    gcode_decimal_seperator = '.';
 final int     gcode_decimals = 2;             // Number of digits right of the decimal point in the gcode files.
 final int     svg_decimals = 2;               // Number of digits right of the decimal point in the SVG file.
 final float   grid_scale = 10.0;              // Use 10.0 for centimeters, 25.4 for inches, and between 444 and 529.2 for cubits.
+
+final String input_image_path = "D:/Julius/Projekte-Julius/img2plot/input/ich-removebg-preview.png";
 
 
 // Every good program should have a shit pile of badly named globals.
@@ -88,6 +88,7 @@ void setup() {
   dy = new Limit(); 
   loadInClass(pfms[current_pfm]);
 
+  loadImageFromPath(input_image_path);
   selectInput("Select an image to process:", "fileSelected");
 }
 
@@ -136,6 +137,10 @@ void draw() {
     println("invalid state: " + state);
     break;
   }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+void loadImageFromPath(String path) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
