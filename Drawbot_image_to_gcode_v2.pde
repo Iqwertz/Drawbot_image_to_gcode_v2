@@ -18,12 +18,14 @@ import processing.pdf.*;
 // Constants 
 final float scale_factor = 10;
 final float global_gcode_scale = 0.25; //if 0 scale is auto. calculated
+final boolean flip_gcode_xy = true;
+final boolean skip_gcode_negative_values = true;
 final float   paper_size_x = 16 * scale_factor;
 final float   paper_size_y = 20 * scale_factor;
 final float   image_size_x = 28 * 15;
 final float   image_size_y = 36 * 15;
-final float   paper_top_to_origin = 0;      //mm, make smaller to move drawing down on paper
-final float   pen_width = 0.65;               //mm, determines image_scale, reduce, if solid black areas are speckled with white holes.
+final float   paper_top_to_origin = 9;      //mm, make smaller to move drawing down on paper
+final float   pen_width = 0.65;               //mm, determines image_scale, reduce, if solid black areas are speckled with white holes. //0.65
 final int     pen_count = 1;
 final char    gcode_decimal_seperator = '.';    
 final int     gcode_decimals = 2;             // Number of digits right of the decimal point in the gcode files.

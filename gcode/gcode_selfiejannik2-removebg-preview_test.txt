@@ -1,0 +1,37 @@
+(This is a test file to draw the extreams of the drawing area.)
+(Draws a 2 inch mark on all four corners of the paper.)
+(WARNING:  pen will be down.)
+(Extreams of X: 20.0 thru 191.25)
+(Extreams of Y: 34.75 thru 158.5)
+$H
+G92X0Y0Z0
+F2000
+G21
+G90
+M05
+(Upper left)
+G1 X20.00 Y85.55
+G1 Z1
+G1 X20.00 Y34.75
+G1 X70.80 Y34.75
+G1 Z0
+(Upper right)
+G1 X140.45 Y34.75
+G1 Z1
+G1 X191.25 Y34.75
+G1 X191.25 Y85.55
+G1 Z0
+(Lower right)
+G1 X191.25 Y107.70
+G1 Z1
+G1 X191.25 Y158.50
+G1 X140.45 Y158.50
+G1 Z0
+(Lower left)
+G1 X70.80 Y158.50
+G1 Z1
+G1 X20.00 Y158.50
+G1 X20.00 Y107.70
+G1 Z0
+M05
+G1 X0 y0

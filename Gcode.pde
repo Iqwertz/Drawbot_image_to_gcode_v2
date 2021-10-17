@@ -86,8 +86,27 @@ void create_gcode_files (int line_count) {
         float gcode_scaled_y1 = d1.lines[i].y1 * gcode_scale + gcode_offset_y;
         float gcode_scaled_x2 = d1.lines[i].x2 * gcode_scale + gcode_offset_x;
         float gcode_scaled_y2 = d1.lines[i].y2 * gcode_scale + gcode_offset_y;
+        
+        if(flip_gcode_xy){
+          float temp = gcode_scaled_x1;
+          gcode_scaled_x1 = gcode_scaled_y1;
+          gcode_scaled_y1 = temp;
+          
+          temp = gcode_scaled_x2;
+          gcode_scaled_x2 = gcode_scaled_y2;
+          gcode_scaled_y2 = temp;
+        }
+        
         distance = sqrt( sq(abs(gcode_scaled_x1 - gcode_scaled_x2)) + sq(abs(gcode_scaled_y1 - gcode_scaled_y2)) );
- 
+        
+        boolean skip = false;
+        if(skip_gcode_negative_values){
+           if(gcode_scaled_x1<0 || gcode_scaled_x2<0 || gcode_scaled_y1<0 || gcode_scaled_y2<0){
+             skip=true;
+           }
+        }
+        
+        if(!skip){
         if (x != gcode_scaled_x1 || y != gcode_scaled_y1) {
           // Oh crap, where the line starts is not where I am, pick up the pen and move there.
           OUTPUT.println("M05");
@@ -123,6 +142,7 @@ void create_gcode_files (int line_count) {
         y = gcode_scaled_y2;
         dx.update_limit(gcode_scaled_x2);
         dy.update_limit(gcode_scaled_y2);
+        }
       }
     }
     

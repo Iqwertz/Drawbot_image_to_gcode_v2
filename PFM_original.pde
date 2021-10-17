@@ -5,9 +5,9 @@
 
 class PFM_original implements pfm {
 
-  final int    squiggle_length = 500;      // How often to lift the pen
+  final int    squiggle_length = 5000;      // How often to lift the pen
   final int    adjustbrightness = 10;       // How fast it moves from dark to light, over-draw
-  final float  desired_brightness = 250;   // How long to process.  You can always stop early with "s" key
+  final float  desired_brightness = 230;   // How long to process.  You can always stop early with "s" key
   final int    squiggles_till_first_change = 190;
 
   int          tests = 13;                 // Reasonable values:  13 for development, 720 for final
@@ -28,7 +28,7 @@ class PFM_original implements pfm {
     //image_unsharpen(img, 5);
     image_unsharpen(img, 4);
     image_unsharpen(img, 3);
-    //image_unsharpen(img, 2);
+    //image_unsharpen(img, 2);<<<
     //image_unsharpen(img, 1);
     //image_motion_blur(img);
     //image_outline(img);
@@ -79,7 +79,7 @@ class PFM_original implements pfm {
   
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   private void find_darkest() {
-    darkest_value = 257;
+    darkest_value = 257; //257
     int darkest_loc = 0;
     
     for (int loc=0; loc < img.width * img.height; loc++) {
