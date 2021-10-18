@@ -56,11 +56,11 @@ function image_rotate() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-function lighten_one_pixel(adjustbrightness, x, y) {
+function lighten_one_pixel(_adjustbrightness, x, y) {
   let loc = (y)*img.width + x;
   let r = brightness(img.pixels[loc]);
   //r += adjustbrightness;
-  r += adjustbrightness + random(0, 0.01);
+  r += _adjustbrightness + random(0, 0.01);
   r = constrain(r,0,255);
   let c = color(r);
   img.pixels[loc] = c;
@@ -69,7 +69,7 @@ function lighten_one_pixel(adjustbrightness, x, y) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 function image_scale(new_width) {
   if (img.width != new_width) {
-    img.resize(new_width, 0);
+    //img.resize(new_width, 0);
   }
 }
 
@@ -134,7 +134,7 @@ function image_boarder(fname,shrink,blur) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-function image_unsharpen(img, amount) {
+function image_unsharpen(_img, amount) {
   // Source:  https://www.taylorpetrick.com/blog/post/convolution-part3
   // Subtle unsharp matrix
   let matrix = [[ -0.00391, -0.01563, -0.02344, -0.01563, -0.00391 ],
@@ -149,8 +149,8 @@ function image_unsharpen(img, amount) {
   //print_matrix(matrix);
   matrix = normalize_matrix(matrix);
   //print_matrix(matrix);
-
-  image_convolution(img, matrix, 1.0, 0.0);
+console.log(_img);
+  image_convolution(_img, matrix, 1.0, 0.0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -252,20 +252,25 @@ function image_convolution(_img, matrix, factor, bias) {
   let n = matrix.length;      // matrix rows
   let m = matrix[0].length;   // matrix columns
   
+ // console.log(_img);
   let simg = createImage(_img.width, _img.height, RGB);
   simg.copy(_img, 0, 0, _img.width, _img.height, 0, 0, simg.width, simg.height);
   let matrixsize = matrix.length;
-
+  
+  console.log(simg.width, simg.height);
+ simg.loadPixels();
   for (let x = 0; x < simg.width; x++) {
     for (let y = 0; y < simg.height; y++ ) {
       let c = convolution(x, y, matrix, matrixsize, simg, factor, bias);
+      //console.log(c);
       let loc = x + y*simg.width;
       _img.pixels[loc] = c;
+      
     }
   }
+  console.log("fin");
   updatePixels();
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // Source:  https://py.processing.org/tutorials/pixels/
@@ -276,9 +281,12 @@ function convolution(x,y, matrix, matrixsize, _img,factor,bias) {
   let rtotal = 0.0;
   let gtotal = 0.0;
   let btotal = 0.0;
-  let offset = matrixsize / 2;
+  let offset = parseInt(matrixsize / 2);
+  
+  //console.log(matrixsize);
 
   // Loop through convolution matrix
+  
   for (let i = 0; i < matrixsize; i++) {
     for (let j = 0; j < matrixsize; j++) {
       // What pixel are we testing
@@ -289,9 +297,12 @@ function convolution(x,y, matrix, matrixsize, _img,factor,bias) {
       loc = constrain(loc,0,_img.pixels.length-1);
       // Calculate the convolution
       // We sum all the neighboring pixels multiplied by the values in the convolution matrix.
-      rtotal += (red(_img.pixels[loc]) * matrix[i][j]);
-      gtotal += (green(_img.pixels[loc]) * matrix[i][j]);
-      btotal += (blue(_img.pixels[loc]) * matrix[i][j]);
+     
+      //console.log(_img, loc);
+      //console.log(_img.pixels[loc]);
+      rtotal += (red(img.pixels[loc]) * matrix[i][j]);
+      gtotal += (green(img.pixels[loc]) * matrix[i][j]);
+      btotal += (blue(img.pixels[loc]) * matrix[i][j]);
     }
   }
   
@@ -359,11 +370,13 @@ function normalize_matrix (matrix) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 function scale_matrix(matrix, scale) {
+  console.log(matrix);
+  
   let n = matrix.length;      // rows
   let p = matrix[0].length;   // columns
   let sum = 0.0;
                          
-  let nmatrix = [[]];
+  let nmatrix = [...Array(n*scale)].map(e => Array(p*scale));
   
   for (let i=0; i<n; i++){
     for (let j=0; j<p; j++){

@@ -271,6 +271,7 @@ void image_convolution(PImage img, float[][] matrix, float factor, float bias) {
   simg.copy(img, 0, 0, img.width, img.height, 0, 0, simg.width, simg.height);
   int matrixsize = matrix.length;
 
+
   for (int x = 0; x < simg.width; x++) {
     for (int y = 0; y < simg.height; y++ ) {
       color c = convolution(x, y, matrix, matrixsize, simg, factor, bias);

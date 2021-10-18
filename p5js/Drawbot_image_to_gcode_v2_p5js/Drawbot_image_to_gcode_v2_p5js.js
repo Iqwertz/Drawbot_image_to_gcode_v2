@@ -30,12 +30,12 @@ let     gcode_decimals = 2;             // Number of digits right of the decimal
 let     svg_decimals = 2;               // Number of digits right of the decimal point in the SVG file.
 let   grid_scale = 10.0;              // Use 10.0 for centimeters, 25.4 for inches, and between 444 and 529.2 for cubits.
 
-let input_image_path = "D:/Julius/Projekte-Julius/img2plot/input/ich-removebg-preview.png";
+let input_image_path = "input/ich-removebg-preview.png";
 
 
 // Every good program should have a shit pile of badly named globals.
 //Class cl = null;
-//pfm ocl;
+let ocl;
 //let current_pfm = 0;
 //String[] pfms = {"PFM_original", "PFM_squares"}; 
 
@@ -70,14 +70,16 @@ let ctrl_down = false;
 
 //Limit   dx, dy;
 //PrintWriter OUTPUT;
-//botDrawing d1;
+let d1;
 
 //float[] pen_distribution = new float[pen_count];
 function preload() {
   img = loadImage(input_image_path);
+  state++;
 }
 
 function setup() {
+  createCanvas(1415,900,WEBGL);
   colorMode(RGB);
   //randomSeed(millis());
   randomSeed(3);
@@ -85,12 +87,56 @@ function setup() {
   //dx = new Limit(); 
   //dy = new Limit(); 
   //loadInClass(pfms[current_pfm]);
+  ocl = new PFM_original();
   //selectInput("Select an image to process:", "fileSelected");
 }
 
 
 function draw() {
 
+if (state != 3) { background(255, 255, 255); }
+  scale(screen_scale);
+  translate(mx, my);
+  rotate(HALF_PI*screen_rotate);
+  
+  switch(state) {
+  case 1: 
+    //println("State=1, Waiting for filename selection");
+    break;
+  case 2:
+    //println("State=2, Setup squiggles");
+    loop();
+    setup_squiggles();
+    startTime = millis();
+    break;
+  case 3: 
+    //println("State=3, Drawing image");
+    if (display_line_count <= 1) {
+      background(255);
+    } 
+    ocl.find_path();
+    display_line_count = d1.line_count;
+    break;
+  case 4: 
+    println("State=4, pfm.post_processing");
+    ocl.post_processing();
+
+    set_even_distribution();
+    d1.evenly_distribute_pen_changes(d1.get_line_count(), pen_count);
+    d1.distribute_pen_changes_according_to_percentages(display_line_count, pen_count);
+
+    println("elapsed time: " + (millis() - startTime) / 1000.0 + " seconds");
+    display_line_count = d1.line_count;
+    state++;
+    break;
+  case 5: 
+    render_all();
+    noLoop();
+    break;
+  default:
+    println("invalid state: " + state);
+    break;
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -104,15 +150,16 @@ function setup_squiggles() {
 
   d1.line_count = 0;
   //randomSeed(millis());
-  img = loadImage(path_selected, "jpeg");  // Load the image into the program  
-
   image_rotate();
 
   img_orginal = createImage(img.width, img.height, RGB);
   img_orginal.copy(img, 0, 0, img.width, img.height, 0, 0, img.width, img.height);
+  
+  img.loadPixels();
+  console.log(img);
+    console.log(img.pixels[10]);
 
   ocl.pre_processing();
-  img.loadPixels();
   img_reference = createImage(img.width, img.height, RGB);
   img_reference.copy(img, 0, 0, img.width, img.height, 0, 0, img.width, img.height);
   
@@ -126,8 +173,8 @@ function setup_squiggles() {
   gcode_offset_x = 0;//- (img.width * gcode_scale / 2.0);  
   gcode_offset_y = - paper_top_to_origin; // - (paper_size_y - (img.height * gcode_scale)) / 2.0);
 
-  screen_scale_x = width / (float)img.width;
-  screen_scale_y = height / (float)img.height;
+  screen_scale_x = width / img.width;
+  screen_scale_y = height / img.height;
   screen_scale = min(screen_scale_x, screen_scale_y);
   screen_scale_org = screen_scale;
 
@@ -373,15 +420,4 @@ void mouseDragged() {
   redraw();
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-// This is the pfm interface, it contains the only methods the main code can call.
-// As well as any variables that all pfm modules must have.
-interface pfm {
-  //public int x=0;
-  public void pre_processing();
-  public void find_path();
-  public void post_processing();
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
 */
