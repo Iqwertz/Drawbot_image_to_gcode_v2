@@ -107,6 +107,7 @@ if (state != 3) { background(255, 255, 255); }
     //println("State=2, Setup squiggles");
     loop();
     setup_squiggles();
+    console.log("setup squiggles");
     startTime = millis();
     break;
   case 3: 

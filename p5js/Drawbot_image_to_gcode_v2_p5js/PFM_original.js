@@ -8,7 +8,7 @@ class PFM_original {
   
   constructor(){
     this.squiggle_length = 5000;      // How often to lift the pen
-    this.adjustbrightness = 10;       // How fast it moves from dark to light, over-draw
+    this.adjustbrightness = 50;       // How fast it moves from dark to light, over-draw
     this.desired_brightness = 230.0;   // How long to process.  You can always stop early with "s" key
     this.squiggles_till_first_change = 190;
   
@@ -30,8 +30,8 @@ class PFM_original {
     //image_sharpen(img);
     //image_blurr(img);
     //image_unsharpen(img, 5);
-    image_unsharpen(img, 4);
-    image_unsharpen(img, 3);
+ //   image_unsharpen(img, 4);
+ //   image_unsharpen(img, 3);
     //image_unsharpen(img, 2);
     //image_unsharpen(img, 1);
     //image_motion_blur(img);
@@ -51,6 +51,7 @@ class PFM_original {
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   find_path() {
     this.find_squiggle();
+    console.log(avg_imgage_brightness());
     if (avg_imgage_brightness() > this.desired_brightness ) {
       state++;
     }
@@ -110,6 +111,7 @@ class PFM_original {
     let img2;
     img2 = createImage(img.width / area_size, img.height / area_size, RGB);
     img2.copy(img, 0, 0, img.width, img.height, 0, 0, img2.width, img2.height);
+    img2.loadPixels();
 
     for (let loc=0; loc < img2.width * img2.height; loc++) {
       let r = brightness(img2.pixels[loc]);

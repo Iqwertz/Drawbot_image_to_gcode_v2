@@ -7,7 +7,7 @@ class PFM_original implements pfm {
 
   final int    squiggle_length = 5000;      // How often to lift the pen
   final int    adjustbrightness = 10;       // How fast it moves from dark to light, over-draw
-  final float  desired_brightness = 230;   // How long to process.  You can always stop early with "s" key
+  final float  desired_brightness = 220;   // How long to process.  You can always stop early with "s" key
   final int    squiggles_till_first_change = 190;
 
   int          tests = 13;                 // Reasonable values:  13 for development, 720 for final

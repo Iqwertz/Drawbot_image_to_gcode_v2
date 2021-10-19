@@ -29,7 +29,7 @@ final int     gcode_decimals = 2;             // Number of digits right of the d
 final int     svg_decimals = 2;               // Number of digits right of the decimal point in the SVG file.
 final float   grid_scale = 10.0;              // Use 10.0 for centimeters, 25.4 for inches, and between 444 and 529.2 for cubits.
 
-final String input_image_path = "D:/Julius/Projekte-Julius/img2plot/input/ich-removebg-preview.png";
+final String input_image_path = "input/ich-removebg-preview.png";
 
 
 // Every good program should have a shit pile of badly named globals.
@@ -76,7 +76,7 @@ float[] pen_distribution = new float[pen_count];
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 void setup() {
   size(1415, 900, P3D);
-  frame.setLocation(200, 200);
+  //frame.setLocation(200, 200);
   surface.setResizable(true);
   surface.setTitle("Drawbot_image_to_gcode_v2, version 3.75");
   colorMode(RGB);
@@ -87,13 +87,14 @@ void setup() {
   dx = new Limit(); 
   dy = new Limit(); 
   loadInClass(pfms[current_pfm]);
-
+background(255,255,0);
   loadImageFromPath(input_image_path);
-  selectInput("Select an image to process:", "fileSelected");
+  //selectInput("Select an image to process:", "fileSelected");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 void draw() {
+   background(255,0,0);
   if (state != 3) { background(255, 255, 255); }
   scale(screen_scale);
   translate(mx, my);
@@ -110,11 +111,14 @@ void draw() {
     startTime = millis();
     break;
   case 3: 
+  
     //println("State=3, Drawing image");
     if (display_line_count <= 1) {
       background(255);
     } 
+    background(0,255,0);
     ocl.find_path();
+    
     display_line_count = d1.line_count;
     break;
   case 4: 
@@ -130,6 +134,7 @@ void draw() {
   case 5: 
     render_all();
     noLoop();
+    create_gcode_files(display_line_count);
     break;
   default:
     println("invalid state: " + state);
@@ -139,6 +144,9 @@ void draw() {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 void loadImageFromPath(String path) {
+  path_selected = dataPath(path);
+  basefile_selected = split(split(path, '/')[1], '.')[0]; //the [1] is wrong (correct way would be to take the last element of the list)
+  state++;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -169,8 +177,8 @@ void setup_squiggles() {
 
   d1.line_count = 0;
   //randomSeed(millis());
+  
   img = loadImage(path_selected, "jpeg");  // Load the image into the program  
-
   image_rotate();
 
   img_orginal = createImage(img.width, img.height, RGB);
@@ -222,13 +230,13 @@ void keyPressed() {
     create_gcode_files(display_line_count);
   }
   if (key == '<') {
-    int delta = -10000;
+    int delta = -5000;
     display_line_count = int(display_line_count + delta);
     display_line_count = constrain(display_line_count, 0, d1.line_count);
     //println("display_line_count: " + display_line_count);
   }
   if (key == '>') {
-    int delta = 10000;
+    int delta = 5000;
     display_line_count = int(display_line_count + delta);
     display_line_count = constrain(display_line_count, 0, d1.line_count);
     //println("display_line_count: " + display_line_count);

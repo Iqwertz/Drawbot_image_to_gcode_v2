@@ -25,7 +25,7 @@ class botDrawing {
 
   addline(pen_number_,pen_down_,x1_,y1_,x2_,y2_) {
     this.line_count++;
-    lines[this.line_count] = new botLine(pen_down_, pen_number_, x1_, y1_, x2_, y2_);
+    this.lines[this.line_count] = new botLine(pen_down_, pen_number_, x1_, y1_, x2_, y2_);
   }
   
   get_line_count() {
