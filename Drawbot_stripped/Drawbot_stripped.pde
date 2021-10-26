@@ -1,3 +1,5 @@
+PrintWriter output;
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // My Drawbot, "Death to Sharpie"
 // Jpeg to gcode simplified (kinda sorta works version, v3.75 (beta))
@@ -74,10 +76,13 @@ float[] pen_distribution = new float[pen_count];
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 void setup() {
-  size(1415, 900, P3D);
+ output = createWriter("log.txt"); 
+  
+  
+  size(1015, 800, P3D);
   //frame.setLocation(200, 200);
-  //surface.setResizable(true);
-  //surface.setTitle("Drawbot_image_to_gcode_v2, version 3.75");
+  surface.setResizable(true);
+  surface.setTitle("Drawbot_image_to_gcode_v2, version 3.75");
   colorMode(RGB);
   frameRate(999);
   //randomSeed(millis());
@@ -89,17 +94,20 @@ void setup() {
   loadImageFromPath();
   background(0);
   //selectInput("Select an image to process:", "fileSelected");
-  
+  output.println("start");
+  output.flush();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 void draw() {
+  output.println("draw");
+  output.flush();
   drawfunctions();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 void drawfunctions(){
-    background(255,0,0);
+   // background(255,0,0);
   if (state != 3) { background(255, 255, 255); }
   scale(screen_scale);
   translate(mx, my);
@@ -111,12 +119,16 @@ void drawfunctions(){
     break;
   case 2:
     //println("State=2, Setup squiggles");
+   // background(0,255,0);
+   output.println("state2");
+   output.flush();
     loop();
     setup_squiggles();
     startTime = millis();
     break;
   case 3: 
-  
+     output.println("state3");
+   output.flush();
     //println("State=3, Drawing image");
     if (display_line_count <= 1) {
       background(255);
@@ -127,6 +139,8 @@ void drawfunctions(){
     display_line_count = d1.line_count;
     break;
   case 4: 
+     output.println("state4");
+   output.flush();
     println("State=4, pfm.post_processing");
     ocl.post_processing();
 
@@ -140,7 +154,7 @@ void drawfunctions(){
     render_all();
     noLoop();
     create_gcode_files(display_line_count);
-      exit();
+    exit();
     break;
   default:
     println("invalid state: " + state);
@@ -184,6 +198,7 @@ void setup_squiggles() {
   d1.line_count = 0;
   //randomSeed(millis());
   
+  
   img = loadImage(path_selected, "jpeg");  // Load the image into the program  
   image_rotate();
 
@@ -209,7 +224,6 @@ void setup_squiggles() {
   screen_scale_y = height / (float)img.height;
   screen_scale = min(screen_scale_x, screen_scale_y);
   screen_scale_org = screen_scale;
-
   state++;
 }
 

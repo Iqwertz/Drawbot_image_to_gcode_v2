@@ -21,6 +21,7 @@ class PFM_original implements pfm {
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   public void pre_processing() {
+    
     image_crop();
     image_scale(int(image_size_x / pen_width));
     //image_sharpen(img);
