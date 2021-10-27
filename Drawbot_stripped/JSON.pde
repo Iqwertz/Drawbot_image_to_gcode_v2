@@ -1,54 +1,8 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-// No, it's not a fancy dancy class like the snot nosed kids are doing these days.
-// Now get the hell off my lawn.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Converts the current object into a json
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-void gcode_header() {
-    OUTPUT.println("$H");
-    OUTPUT.println("G92X0Y0Z0");
-    OUTPUT.println("F2000");
-    OUTPUT.println("G21");
-    OUTPUT.println("G90");
-    OUTPUT.println("M05");
-}
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-void gcode_trailer() {
-    OUTPUT.println("M05");
-    OUTPUT.println("G1 X0 y0");
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-void pen_up() {
-    is_pen_down = false;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-void pen_down() {
-    is_pen_down = true;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-void move_abs(int pen_number, float x, float y) {
-    
-    d1.addline(pen_number, is_pen_down, old_x, old_y, x, y);
-    if (is_pen_down) {
-        d1.render_last();
-    }
-    
-    old_x = x;
-    old_y = y;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-String gcode_format(Float n) {
-    String s = nf(n, 0, gcode_decimals);
-    s = s.replace('.', gcode_decimal_seperator);
-    s = s.replace(',', gcode_decimal_seperator);
-    return s; 
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-void create_gcode_files(int line_count) {
+void createJSON(int line_count) {
     boolean is_pen_down;
     int pen_lifts;
     float pen_movement;
@@ -67,8 +21,8 @@ void create_gcode_files(int line_count) {
         lines_drawn = 0;
         x = 0;
         y = 0;
-        String gname = "gcode\\gcode_" + basefile_selected + ".nc";
-        OUTPUT = createWriter(sketchPath("") + gname);
+        String fname = "json\\json_" + basefile_selected + ".json";
+        JSON = createWriter(sketchPath("") + fname);
         gcode_header();
         
         for (int i = 1; i < line_count; i++) { 
