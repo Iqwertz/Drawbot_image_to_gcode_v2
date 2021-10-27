@@ -52,7 +52,7 @@ public class GClip implements ClipboardOwner {
     SecurityManager security = System.getSecurityManager();
     if (security != null) {
       try {
-        security.checkSystemClipboardAccess();
+       // security.checkSystemClipboardAccess();
         clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
       } 
       catch (SecurityException e) {

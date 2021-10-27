@@ -102,7 +102,7 @@ String[][] copic_sets = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 void setup() {
   size(1415, 900, P3D);
-  frame.setLocation(200, 200);
+  //frame.setLocation(200, 200);
   surface.setResizable(true);
   surface.setTitle("Drawbot_image_to_gcode_v2, version 3.75");
   colorMode(RGB);
