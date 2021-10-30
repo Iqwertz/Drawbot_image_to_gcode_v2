@@ -31,7 +31,7 @@ final int     gcode_decimals = 2;             // Number of digits right of the d
 final int     svg_decimals = 2;               // Number of digits right of the decimal point in the SVG file.
 final float   grid_scale = 10.0;              // Use 10.0 for centimeters, 25.4 for inches, and between 444 and 529.2 for cubits.
 
-final String input_image_path = "input/cool2.jpg";
+final String input_image_path = "input/image.jpg";
 
 // Every good program should have a shit pile of badly named globals.
 Class cl = null;
@@ -68,6 +68,8 @@ String  basefile_selected = "";
 int     startTime = 0;
 boolean ctrl_down = false;
 
+boolean drawToScreen = false;
+
 Limit   dx, dy;
 PrintWriter OUTPUT;
 PrintWriter JSON;
@@ -80,7 +82,7 @@ void setup() {
     output = createWriter("log.txt"); 
     
     
-    size(1015, 800, P3D);
+    size(10, 10);
     //frame.setLocation(200, 200);
     surface.setResizable(true);
     surface.setTitle("Drawbot_image_to_gcode_v2, version 3.75");
@@ -152,7 +154,9 @@ void drawfunctions() {
             state++;
             break;
         case 5 : 
+        if(drawToScreen){
             render_all();
+    }
             noLoop();
             create_gcode_files(display_line_count);
             exit();

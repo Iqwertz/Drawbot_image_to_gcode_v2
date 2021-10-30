@@ -26,7 +26,7 @@ class botLine {
   }
 
   void render_with_copic() {
-    if (pen_down) {
+    if (pen_down && drawToScreen) {
       color c = color(0, 0, 0);
       //stroke(c, 255-brightness(c));
       stroke(c);

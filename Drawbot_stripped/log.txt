@@ -1,10 +1,6 @@
 start
 draw
 state2
-squiggles
-imgc
-preprocessing
-scale
 draw
 state3
 draw
@@ -50,4 +46,3 @@ state3
 draw
 state4
 draw
-state5
