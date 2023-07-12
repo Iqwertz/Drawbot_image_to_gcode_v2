@@ -26,7 +26,7 @@ final float   image_size_x = 28 * 15;
 final float   image_size_y = 36 * 15;
 final float   paper_top_to_origin = 9;      //mm, make smaller to move drawing down on paper
 final float   pen_width = 0.65;               //mm, determines image_scale, reduce, if solid black areas are speckled with white holes. //0.65
-final int     pen_count = 1;
+final int     pen_count = 5;
 final char    gcode_decimal_seperator = '.';    
 final int     gcode_decimals = 2;             // Number of digits right of the decimal point in the gcode files.
 final int     svg_decimals = 2;               // Number of digits right of the decimal point in the SVG file.
@@ -103,8 +103,8 @@ String[][] copic_sets = {
 void setup() {
   size(1415, 900, P3D);
   //frame.setLocation(200, 200);
-  surface.setResizable(true);
-  surface.setTitle("Drawbot_image_to_gcode_v2, version 3.75");
+  //surface.setResizable(true);
+  //surface.setTitle("Drawbot_image_to_gcode_v2, version 3.75");
   colorMode(RGB);
   frameRate(999);
   //randomSeed(millis());

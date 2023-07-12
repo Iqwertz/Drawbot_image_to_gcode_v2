@@ -65,6 +65,9 @@ void create_gcode_files (int line_count) {
   float y;
   float distance;
   
+  String gnameAll = "gcode\\gcode_all.nc";
+  OUTPUT = createWriter(sketchPath("") + gnameAll);
+  gcode_header();
   // Loop over all lines for every pen.
   for (int p=0; p<pen_count; p++) {    
     is_pen_down = false;
@@ -74,10 +77,9 @@ void create_gcode_files (int line_count) {
     lines_drawn = 0;
     x = 0;
     y = 0;
-    String gname = "gcode\\gcode_" + basefile_selected + "_pen" + p + "_" + copic_sets[current_copic_set][p] + ".txt";
-    OUTPUT = createWriter(sketchPath("") + gname);
+    //String gname = "gcode\\gcode_" + basefile_selected + "_pen" + p + "_" + copic_sets[current_copic_set][p] + ".nc";
+    //OUTPUT = createWriter(sketchPath("") + gname);
     //OUTPUT.println(gcode_comments);
-    gcode_header();
     
     for (int i=1; i<line_count; i++) { 
       if (d1.lines[i].pen_number == p) {
@@ -146,15 +148,18 @@ void create_gcode_files (int line_count) {
       }
     }
     
-    gcode_trailer();
+   // gcode_trailer();
    // OUTPUT.println("(Drew " + lines_drawn + " lines for " + pen_drawing  / 25.4 / 12 + " feet)");
    // OUTPUT.println("(Pen was lifted " + pen_lifts + " times for " + pen_movement  / 25.4 / 12 + " feet)");
    // OUTPUT.println("(Extreams of X: " + dx.min + " thru " + dx.max + ")");
    // OUTPUT.println("(Extreams of Y: " + dy.min + " thru " + dy.max + ")");
    // OUTPUT.flush();
    // OUTPUT.close();
-    println("gcode created:  " + gname);
+   //println("gcode created:  " + gname);
+   OUTPUT.println("M226");
   }
+  
+   gcode_trailer();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
